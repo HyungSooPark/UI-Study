@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        .area{
+            height: 250px;
+            border: 1px solid black;
+            background-color: lightgray;
+            padding: 10px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function test1(){
+            var st0 = {name:'박형수',java:90,oracle:32,html:87,css:44,js:65};
+            var st1 = {name:'홍길동',java:51,oracle:79,html:45,css:12,js:91};
+            var st2 = {name:'임꺽정',java:88,oracle:45,html:99,css:26,js:84};
+            var st3 = {name:'유관순',java:35,oracle:44,html:67,css:60,js:79};
+            var st4 = {name:'김유신',java:49,oracle:85,html:10,css:97,js:50};
+            var st5 = {name:'안중근',java:21,oracle:88,html:73,css:69,js:82};
+            var st6 = {name:'윤봉길',java:58,oracle:82,html:85,css:69,js:74};
+            var st7 = {name:'신사임당',java:12,oracle:23,html:34,css:45,js:67};
+            var st8 = {name:'이황',java:99,oracle:88,html:77,css:66,js:55};
+
+            var students = [];
+            students.push(st0);
+            students.push(st1);
+            students.push(st2);
+            students.push(st3);
+            students.push(st4);
+            students.push(st5);
+            students.push(st6);
+            students.push(st7);
+            students.push(st8);
+
+            // console.log(students);
+
+            for(var i in students){
+                students[i].getSum = function(){
+                    return this.java+this.oracle+this.html+this.css+this.js;
+                }
+
+                students[i].getAvg = function(){
+                    return this.getSum()/5;
+                }
+
+                //모든 학생의 정보가 담긴 배열의 메소드를 통해 총점과 평균 출력(id=area1인 div)
+
+                // students[i].toString = function(){
+                //     return this.name+" [총점 : "+this.getSum()+", 평균 : "+this.getAvg()+"]<br>";
+                // }
+
+                // document.getElementById("area1").innerHTML += students[i].toString();
+
+                with(students[i]){
+                    document.getElementById("area1").innerHTML += name + "[총점 : "+getSum()+", 평균 : "+getAvg()+"]<br>";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>객체배열</h1>
+    <h3>객체와 배열을 사용한 데이터 관리</h3>
+    <button onclick="test1();">클릭!</button>
+    <br><br>
+    <div id="area1" class="area"></div>
+
+    <h3>생성자 함수</h3>
+    <p>new 키워드 사용해 객체를 생성</p>
+    <button onclick="test2();">클릭!!</button>
+    <br><br>
+    <div id="area2" class="area"></div>
+    <script>
+        function Student(name,java,oracle,html,css,js){
+            this.name = name;
+            this.java = java;
+            this.oracle = oracle;
+            this.html = html;
+            this.css = css;
+            this.js = js;
+
+            this.getSum = function(){
+                return this.java+this.oracle+this.html+this.css+this.js;
+            }
+
+            this.getAvg = function(){
+                return this.getSum()/5;
+            }
+
+            this.toString = function(){
+                return this.name+" [총점 : "+this.getSum()+", 평균 : "+this.getAvg()+"]<br>";
+            }
+        }
+
+        var students = [];
+
+        function test2(){
+            students.push(new Student("박형수",99,88,77,66,55));
+            students.push(new Student("홍길동",11,22,33,44,55));
+            
+            console.log(students);
+
+            for(var i in students){
+                document.getElementById("area2").innerHTML += students[i].toString();
+            }
+        }
+    </script>
+</body>
+</html>
